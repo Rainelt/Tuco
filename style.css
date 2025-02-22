@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #111;
+    touch-action: none;
+}
+.circle {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    position: absolute;
+}
