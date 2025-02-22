@@ -1,4 +1,6 @@
 body {
+    touch-action: none; /* Désactive les interactions tactiles comme le scroll */
+    overflow: hidden; /* Empêche le défilement */
     margin: 0;
     overflow: hidden;
     background-color: #916161;
