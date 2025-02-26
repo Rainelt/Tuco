@@ -1,10 +1,10 @@
 {
-    "name": "TUCO PWA",
-    "short_name": "PWA",
+    "name": "TUCO APP",
+    "short_name": "TUCO",
     "start_url": "/",
     "scope": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
+    "background_color": "#3a1e49",
     "theme_color": "#000000",
     "icons": [
       {
