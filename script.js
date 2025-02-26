@@ -7,6 +7,13 @@ let canvas = document.getElementById('mycanvas');
 let heightRatio = 2;
 canvas.height = canvas.width * heightRatio;
 
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.querySelector(".circle1").style.animation = "rotateLeft 3s infinite ease-in-out";
+        document.querySelector(".circle2").style.animation = "rotateRight 5s infinite ease-in-out";
+    }, 0.5); // Petit délai pour stabiliser la mise en page
+});
+
 canvas.addEventListener("touchstart", (event) => {
     event.preventDefault();
     
