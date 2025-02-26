@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="style.css">
-    <title>Multi-Touch Cercles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap" rel="stylesheet">
+        <title>TUCO</title>
 </head>
 <body>
-    <h1>Multi-Touch Cercles</h1>
-    <h2>Super appli</h2>
-    <button id="reset">Reset</button>
+    <div class="boxLogo">
+        <div class="logo-container">
+            <img src="./img/fond-vert.png" class="logo-shape">
+            <img src="./img/cercle1.png" class="circle1">
+            <img src="./img/cercle2.png" class="circle2">
+        </div>
+        <p class="texte">TUCO</p>
+    </div>
+    
 
-    <!-- Charger le script JavaScript à la fin pour éviter les erreurs -->
-    <script src="script.js"></script>
+    <div class="canvas-container">
+        <canvas id="mycanvas"></canvas>
+    </div>
+    <script src="script.js" defer></script>
 </body>
+
 </html>

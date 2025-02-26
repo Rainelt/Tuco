@@ -2,16 +2,203 @@ body {
     touch-action: none; /* Désactive les interactions tactiles comme le scroll */
     overflow: hidden; /* Empêche le défilement */
     margin: 0;
-    overflow: hidden;
-    background-color: #916161;
+    padding: 0;
+    background-color: #000000;
     touch-action: none;
+    height: 100%;
 }
 .circle {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%),scale(1.2);
+    box-shadow: none;
     pointer-events: none;
     position: absolute;
+    animation: pulse 600ms linear infinite alternate,
+               boxMagic 2s linear infinite alternate;
+    transform-origin: center;
+    border: 5px solid #ffffff;
+    padding-top: 20px;
+}
+
+p {
+    font-family: "Sigmar", serif;
+    color: #528b45;
+    font-style: normal;
+    font-size: 40px;
+    -webkit-text-stroke: 1px white;
+    text-align: center;
+    margin: 0; 
+}
+
+.boxLogo {
+    display: flex; /* Aligne les éléments en ligne */
+    align-items: center; /* Centre verticalement */
+    gap: 20px; 
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 5px;
+    border: 1px solid #ffffff; /* Bordure sur tous les côtés */
+    box-sizing: border-box; /* Assure que la bordure est bien visible */
+    background-color: #3a1e49;
+    border-style: solid;
+    border-color: #ffffff;
+    border-radius: 10px;
+    position: fixed;
+    z-index: 3;
+}
+
+
+.sigmar-regular {
+    font-family: "Sigmar", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5) rotate(360deg); /* Grossit */
+        opacity: 0.8;
+    }
+}
+@keyframes boxMagic {
+    from{
+        
+        box-shadow: 
+        0 0 0 rgb(255, 173, 20),
+        0 0 0 rgb(175, 24, 147),
+        0 0 0 rgb(24, 175, 147),
+        0 0 0 rgb(18, 203, 108),
+    }
+    to{
+        
+        box-shadow: 
+        0 -15px 0 rgb(82, 139, 69),
+        -15px 0 0 rgb(54, 175, 24),
+        0 -15px 0 rgb(58, 30, 73),
+        -15px 0 0 rgb(169, 71, 237);
+    }
+}
+.canvas-container {
+    position: fixed; /* Fixe le canvas sur tout l'écran */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+#mycanvas {
+    display: block;
+    width: 100%;
+    height: 100vh; /* Plein écran */
+    background: linear-gradient(120deg, #2a142f, #2c6b4f, #3a6e38);
+
+    background-size: 300% 300%; 
+    animation: gradientMove  7s ease-in-out infinite;; /* Animation infinie */
+}
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+@keyframes expandWinner {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Lueur douce */
+        opacity: 1;
+    }
+    50% {
+        transform: scale(20); /* Agrandissement intermédiaire */
+        box-shadow: 0 0 50px rgba(255, 215, 0, 0.8); /* Intensification */
+    }
+    80% {
+        transform: scale(40);
+        box-shadow: 0 0 100px rgba(255, 215, 0, 1); /* Max glow */
+        opacity: 1; /* Encore visible */
+    }
+    100% {
+        transform: scale(50);
+        opacity: 0; /* Disparition en fondu */
+    }
+}
+@keyframes explode {
+    0% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    30% {
+        transform: translate(-50%, -50%) scale(1.8) rotate(80deg);
+        opacity: 0.9;
+    }
+    60% {
+        transform: translate(-50%, -50%) scale(2.5) rotate(-80deg);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(3.5) rotate(0deg);
+        opacity: 0;
+    }
+}
+
+.winner {
+    animation: explode 1s ease-out forwards;
+    background: radial-gradient(circle, rgb(0, 134, 22),rgb(72, 8, 75));
+}
+
+.logo-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-left: 10px;
+}
+
+.logo-shape {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: auto;
+    transform: translate(-50%, -50%);
+}
+
+.circle1, .circle2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: auto;
+    transform: translate(-50%, -50%);
+}
+
+.circle1 {
+    animation: rotateLeft 1s linear infinite;
+}
+
+.circle2 {
+    animation: rotateRight 1s linear infinite;
+}
+
+@keyframes rotateLeft {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) rotate(10deg); }
+    100% { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+@keyframes rotateRight {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-50%, -50%) rotate(-10deg); }
+    100% { transform: translate(-50%, -50%) rotate(0deg); }
 }

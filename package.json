@@ -1,0 +1,16 @@
+{
+  "name": "tuco",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/core": "^7.0.1",
+    "@capacitor/haptics": "^7.0.0"
+  }
+}
