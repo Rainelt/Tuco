@@ -37,7 +37,7 @@ window.addEventListener("load", () => {
     }, 0.5); // Petit délai pour stabiliser la mise en page
 });
 
-
+ 
 document.querySelector(".spinner").addEventListener("click", () => {
     const randomColor1 = colors[Math.floor(Math.random() * colors.length)];
     const randomColor2 = colors[Math.floor(Math.random() * colors.length)];
