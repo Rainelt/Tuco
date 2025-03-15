@@ -22,6 +22,57 @@ html,body {
     border: 5px solid #ffffff;
     padding-top: 20px;
 }
+/* From Uiverse.io by catraco */ 
+.spinner {
+    --size: 30px;
+    --first-clr: #528b45;
+    --second-clr: #642782;
+    width: 80px;
+    height: 80px;
+    position: relative;
+  }
+  
+  .spinner::before,
+  .spinner::after {
+    content: "";
+    width: var(--size);
+    height: var(--size);
+    border: 5px solid var(--first-clr);
+    position: absolute;
+    top: 35%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    animation: kf-spin 1s linear infinite;
+    border-radius: 50% 80% 50% 70%;
+    box-sizing: border-box;
+  }
+  
+  .spinner::after {
+    top: 35%;
+    left: 40%;
+    border: 5px solid var(--second-clr);
+    animation: kf-spin 1s linear infinite reverse;
+  }
+  
+  @keyframes kf-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  
+  @keyframes kf-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
 
 p {
     font-family: "Sigmar", serif;
@@ -36,6 +87,7 @@ p {
 .boxLogo {
     display: flex; /* Aligne les éléments en ligne */
     align-items: center; /* Centre verticalement */
+    justify-content: center;
     gap: 20px; 
     width: 100%;
     top: 0;
@@ -43,7 +95,7 @@ p {
     right: 5px;
     border: 1px solid #ffffff; /* Bordure sur tous les côtés */
     box-sizing: border-box; /* Assure que la bordure est bien visible */
-    background-color: #3a1e49;
+    background-color: #2b1934;
     border-style: solid;
     border-color: #ffffff;
     border-radius: 10px;
@@ -93,14 +145,18 @@ p {
     width: 100vw;
     height: 100vh;
 }
-
+:root {
+    --color1: #2a142f;
+    --color2: #2c6b4f;
+    --color3: #3a6e38;
+}
 #mycanvas {
     display: block;
     width: 100%;
     height: 100vh; /* Plein écran */
-    background: linear-gradient(120deg, #2a142f, #2c6b4f, #3a6e38);
+    background: linear-gradient(120deg, var(--color1), var(--color2), var(--color3));
     background-size: 300% 300%; 
-    animation: gradientMove  7s ease-in-out infinite;; /* Animation infinie */
+    animation: gradientMove  5s linear infinite; /* Animation infinie */
 }
 @keyframes gradientMove {
     0% {
