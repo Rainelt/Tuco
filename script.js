@@ -2,6 +2,7 @@ let touchesActives = {}; // Stocke les touches actives
 let circles = []; // Liste des cercles créés
 let hasWinnerBeenChosen = false; // Empêche de choisir plusieurs gagnants
 let timeoutId = null; // Stocke l'ID du setTimeout pour l'annuler si besoin
+
 const colors = [
     "#FF6B6B", // Rouge corail
     "#F7B801", // Jaune safran
@@ -22,7 +23,26 @@ const colors = [
     "#FFBE0B", // Jaune punchy
     "#9B5DE5", // Mauve lumineux
     "#E63946", // Rouge intense
-    "#457B9D"  // Bleu doux
+    "#457B9D", // Bleu doux
+    "#264653", // Bleu pétrole
+    "#D81159", // Rose magenta
+    "#8AC926", // Vert pomme
+    "#FF924C", // Orange doux
+    "#A29BFE", // Lavande moderne
+    "#FDCB58", // Or lumineux
+    "#C14953", // Rouge brique
+    "#2A9D8F", // Vert émeraude
+    "#E76F51", // Terre cuite
+    "#3D348B", // Bleu indigo
+    "#F15BB5", // Rose bubblegum
+    "#9C6644", // Brun chocolat
+    "#D4A373", // Beige caramel
+    "#5E60CE", // Bleu lavande
+    "#8D99AE", // Gris bleuté
+    "#EF233C", // Rouge dynamique
+    "#06A77D", // Vert tropical
+    "#7B2CBF", // Violet royal
+    "#ED9B40"  // Orange safran 
 ];
 
 
@@ -37,7 +57,7 @@ window.addEventListener("load", () => {
     }, 0.5); // Petit délai pour stabiliser la mise en page
 });
 
- 
+// gestion changement de couleur
 document.querySelector(".spinner").addEventListener("click", () => {
     const randomColor1 = colors[Math.floor(Math.random() * colors.length)];
     const randomColor2 = colors[Math.floor(Math.random() * colors.length)];
@@ -116,28 +136,65 @@ function mixColors(color1, color2) {
     return rgbToHex(mixedColor.r, mixedColor.g, mixedColor.b);
 }
 // Fonction pour choisir un gagnant et relancer une nouvelle partie
+// function chooseRandomWinner() {
+//     if (circles.length === 0 ) return;  
+
+//     let randomIndex = Math.floor(Math.random() * circles.length);
+//     let winner = circles[randomIndex];
+
+//     winner.classList.add("winner");
+//     winner.style.border = "0px";
+//     winner.style.backgroundColor = "red";
+
+//     // Faire disparaître les autres cercles avec une animation
+//     circles.forEach(circle => {
+//         if (circle !== winner) {
+//             circle.remove()
+//         }
+//     });
+
+//     // Réinitialiser pour permettre une nouvelle partie
+//     setTimeout(() => {
+//         hasWinnerBeenChosen = false; // Permet de relancer une nouvelle partie
+//         circles = []; // Vide la liste des cercles
+//     }, 500);
+// }
 function chooseRandomWinner() {
-    if (circles.length === 0 ) return;  
+    if (circles.length === 0) return;
 
-    let randomIndex = Math.floor(Math.random() * circles.length);
-    let winner = circles[randomIndex];
+    // Vérifie si le switch est activé
+    const switchInput = document.querySelector(".switch input");
+    const numberOfWinners = switchInput.checked ? 2 : 1;
 
-    winner.classList.add("winner");
-    winner.style.border = "0px";
-    winner.style.backgroundColor = "red";
+    let winners = [];
+    let availableCircles = [...circles]; // Copie de la liste des cercles
+
+    for (let i = 0; i < numberOfWinners; i++) {
+        if (availableCircles.length === 0) break; // Sécurité si moins de cercles
+        let randomIndex = Math.floor(Math.random() * availableCircles.length);
+        let winner = availableCircles[randomIndex];
+        winners.push(winner);
+        availableCircles.splice(randomIndex, 1); // Supprime le gagnant de la liste
+    }
+
+    winners.forEach(winner => {
+        winner.classList.add("winner");
+        winner.style.border = "0px";
+        winner.style.backgroundColor = "red";
+    });
 
     // Faire disparaître les autres cercles avec une animation
     circles.forEach(circle => {
-        if (circle !== winner) {
-            circle.remove()
+        if (!winners.includes(circle)) {
+            circle.remove();
         }
     });
 
-    // Réinitialiser pour permettre une nouvelle partie
+    // Réinitialisation pour permettre une nouvelle partie
     setTimeout(() => {
-        hasWinnerBeenChosen = false; // Permet de relancer une nouvelle partie
-        circles = []; // Vide la liste des cercles
-    }, 500);
+        hasWinnerBeenChosen = false;
+        circles = [];
+    }, 1000);
 }
 
 
