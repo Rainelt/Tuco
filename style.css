@@ -7,6 +7,11 @@ html,body {
     touch-action: none;
     height: 100%;
 }
+:root {
+    --color1: #2a142f;
+    --color2: #2c6b4f;
+    --color3: #3a6e38;
+}
 .circle {
     position: absolute;
     width: 70px;
@@ -22,7 +27,97 @@ html,body {
     border: 5px solid #ffffff;
     padding-top: 20px;
 }
-/* From Uiverse.io by catraco */ 
+.overlay-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    z-index: 10;
+}
+.popup-header {
+    background: var(--color1);
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Sigmar", serif;
+    padding: 12px;
+    text-align: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+.content-popup {
+    height: 80%;
+    width: 80%;
+    background: var(--color3);
+    font-family: "Sigmar", serif;
+    overflow: auto;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    z-index: 11;
+}
+.overlay-popup.show .content-popup {
+    transform: scale(1);
+    opacity: 1;
+}
+.popup-list {
+    list-style: none;
+    padding: 0;
+    overflow-y: auto; 
+    margin: 15px 0;
+}
+
+.popup-list li {
+    background: var(--color2);
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+}
+.popup-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    font-family: "Sigmar", serif;
+    color: #ffffff;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+.popup-button:hover {
+    color: #333;
+}
+.button-minus, .button-plus {
+    background: var(--color1);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+/* Espacement entre les boutons et le texte */
+.button-minus {
+    margin-right: 40px; /* Espacement entre le bouton "-" et le texte */
+}
+
+.button-plus {
+    margin-left: 40px; /* Espacement entre le texte et le bouton "+" */
+}
 .spinner {
     --size: 30px;
     --first-clr: #528b45;
@@ -145,11 +240,7 @@ p {
     width: 100vw;
     height: 100vh;
 }
-:root {
-    --color1: #2a142f;
-    --color2: #2c6b4f;
-    --color3: #3a6e38;
-}
+
 #mycanvas {
     display: block;
     width: 100%;

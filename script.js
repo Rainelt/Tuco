@@ -1,50 +1,14 @@
+fetch('tableaucouleurs.json')
+    .then(response => response.json()) 
+    .then(data => {
+        colors = data; 
+    })
+.catch(error => console.error("Erreur de chargement du JSON", error));
+
 let touchesActives = {}; // Stocke les touches actives
 let circles = []; // Liste des cercles créés
 let hasWinnerBeenChosen = false; // Empêche de choisir plusieurs gagnants
 let timeoutId = null; // Stocke l'ID du setTimeout pour l'annuler si besoin
-
-const colors = [
-    "#FF6B6B", // Rouge corail
-    "#F7B801", // Jaune safran
-    "#6A0572", // Violet profond
-    "#00B4D8", // Bleu turquoise
-    "#8338EC", // Violet électrique
-    "#FF006E", // Rose vif
-    "#06D6A0", // Vert menthe
-    "#118AB2", // Bleu océan
-    "#FFD166", // Jaune doux
-    "#EF476F", // Rose framboise
-    "#073B4C", // Bleu nuit
-    "#1B9AAA", // Bleu canard
-    "#A28089", // Mauve élégant
-    "#FF5E5B", // Rouge chaud
-    "#FB8B24", // Orange moderne
-    "#3A86FF", // Bleu vibrant
-    "#FFBE0B", // Jaune punchy
-    "#9B5DE5", // Mauve lumineux
-    "#E63946", // Rouge intense
-    "#457B9D", // Bleu doux
-    "#264653", // Bleu pétrole
-    "#D81159", // Rose magenta
-    "#8AC926", // Vert pomme
-    "#FF924C", // Orange doux
-    "#A29BFE", // Lavande moderne
-    "#FDCB58", // Or lumineux
-    "#C14953", // Rouge brique
-    "#2A9D8F", // Vert émeraude
-    "#E76F51", // Terre cuite
-    "#3D348B", // Bleu indigo
-    "#F15BB5", // Rose bubblegum
-    "#9C6644", // Brun chocolat
-    "#D4A373", // Beige caramel
-    "#5E60CE", // Bleu lavande
-    "#8D99AE", // Gris bleuté
-    "#EF233C", // Rouge dynamique
-    "#06A77D", // Vert tropical
-    "#7B2CBF", // Violet royal
-    "#ED9B40"  // Orange safran 
-];
-
 
 let canvas = document.getElementById('mycanvas');
 let heightRatio = 2;
@@ -55,6 +19,62 @@ window.addEventListener("load", () => {
         document.querySelector(".circle1").style.animation = "rotateLeft 3s infinite ease-in-out";
         document.querySelector(".circle2").style.animation = "rotateRight 5s infinite ease-in-out";
     }, 0.5); // Petit délai pour stabiliser la mise en page
+});
+
+// gestion classement
+document.querySelector(".texte").addEventListener("click", () => {
+    document.getElementById("popup").classList.add("show");
+    let listclassement = document.getElementById("popupList");
+    listclassement.innerHTML = "";   
+    for(let i = 0; i < localStorage.length; i++) {
+        var li = document.createElement("li");
+        const userKey = Object.keys(localStorage)[i]; // Récupération de la clé utilisateur
+        let score = parseInt(localStorage.getItem(userKey)) || 0;
+        const scoreText = document.createTextNode(userKey + " : " + score);
+        // Bouton "-" à gauche
+        const minusButton = document.createElement("button");
+        minusButton.classList.add("button-minus");
+        minusButton.textContent = "-";
+        minusButton.setAttribute("data-index", i);
+        // Bouton "+" à droite
+        const plusButton = document.createElement("button");
+        plusButton.classList.add("button-plus");
+        plusButton.textContent = "+";
+        plusButton.setAttribute("data-index", i);
+
+
+
+        // Ajouter les éléments dans le <li>
+        li.appendChild(minusButton);
+        li.appendChild(scoreText);
+        li.appendChild(plusButton);
+        // Ajout des événements de clic
+        minusButton.addEventListener("click", function () {
+            //console.log("Bouton - cliqué pour :", Object.keys(localStorage)[i]);
+            let moins = parseInt(Object.values(localStorage)[i]);
+            let user = Object.keys(localStorage)[i];
+            moins -= 1;
+            localStorage.setItem(user, moins.toString());
+            scoreText.nodeValue = userKey + " : " + moins;
+        });
+
+        plusButton.addEventListener("click", function () {
+            //console.log("Bouton + cliqué pour :", Object.keys(localStorage)[i]);
+            let plus = parseInt(Object.values(localStorage)[i]);
+            let user = Object.keys(localStorage)[i];
+            plus += 1;
+            localStorage.setItem(user, plus.toString());
+            scoreText.nodeValue = userKey + " : " + plus;
+        });
+        listclassement.appendChild(li); 
+    }
+    
+    document.getElementById("popup").style.display = "flex";
+});
+
+document.getElementById("closePopup").addEventListener("click", function() {
+    document.getElementById("popup").classList.remove("show");
+    document.getElementById("popup").style.display = "none";
 });
 
 // gestion changement de couleur
@@ -70,6 +90,15 @@ document.querySelector(".spinner").addEventListener("click", () => {
     document.documentElement.style.setProperty("--color3", randomColor2);
 
     document.getElementById("myText").style.setProperty("color", randomColor1);
+
+    localStorage.clear()
+    localStorage.setItem('Matisse', '1');
+    localStorage.setItem('Pierre', '2');
+    localStorage.setItem('Yolan', '2');
+    localStorage.setItem('Alexis', '2');
+    localStorage.setItem('Justine', '2');
+    localStorage.setItem('Axel', '2');
+
 });
 
 canvas.addEventListener("touchstart", (event) => {
